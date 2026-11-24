@@ -1,13 +1,38 @@
 # Déclaration d'utilisation de l'intelligence artificielle
 
-Dans le cadre du projet F16 – Loi d'Okun, j'ai utilisé ChatGPT comme outil d'assistance.
+Dans le cadre du projet individuel F16 – Loi d'Okun, j'ai utilisé ChatGPT comme outil d'assistance pédagogique et technique.
 
-L'intelligence artificielle m'a aidé à :
-- Comprendre la problématique et les notions économiques liées à la loi d'Okun.
-- Organiser l'arborescence du dépôt GitHub.
-- Comprendre les étapes de préparation et d'analyse des données.
-- Obtenir des explications méthodologiques sur la régression linéaire.
+### 1. Outil utilisé
 
-Je reste responsable du travail réalisé. Je m'engage à comprendre, vérifier, tester et adapter les méthodes et les codes utilisés, ainsi qu'à être capable d'expliquer les résultats obtenus lors de la soutenance.
+- **Outil :** ChatGPT (GPT-6).
+- **Période d'utilisation :** novembre 2026.
 
-Cette déclaration sera actualisée au fur et à mesure de l'avancement du projet.
+### 2. Nature de l'assistance apportée
+
+L'intelligence artificielle m'a accompagné dans les activités suivantes :
+
+- Compréhension de la loi d'Okun et des notions économiques et statistiques associées.
+- Formulation et amélioration de la problématique de recherche.
+- Organisation de l'arborescence du dépôt GitHub.
+- Assistance à la préparation et au traitement des données économiques.
+- Explications et propositions de code Python pour la régression linéaire, le Pipeline et la validation chronologique.
+- Mise en place de la référence naïve, de la courbe d'apprentissage et des exemples de prédictions.
+- Assistance à l'analyse statistique : régression OLS, erreurs-types robustes HAC, test de Breusch-Godfrey et stabilité du coefficient.
+- Interprétation des résultats, des graphiques et des limites du modèle.
+- Amélioration de la rédaction des interprétations et de la conclusion.
+
+### 3. Parties du projet concernées
+
+Cette assistance a concerné principalement le notebook `F16_Loi_Okun_USA.ipynb`, notamment la préparation des données, la modélisation, l'évaluation, l'analyse critique et la conclusion, ainsi que l'organisation et la documentation du dépôt GitHub.
+
+### 4. Vérifications effectuées
+
+Les propositions de code ont été intégrées et exécutées dans Google Colab. Les sorties, tableaux, graphiques et indicateurs statistiques ont été examinés afin de vérifier leur cohérence avec les données utilisées.
+
+Les modifications du dépôt ont également été vérifiées sur GitHub.
+
+### 5. Responsabilité personnelle
+
+Je reste entièrement responsable du travail réalisé. L'intelligence artificielle a constitué un outil d'assistance et ne remplace pas ma compréhension du projet.
+
+Je m'engage à comprendre et à pouvoir expliquer les choix méthodologiques, les traitements effectués, les résultats obtenus et les limites de cette étude lors de la soutenance.
