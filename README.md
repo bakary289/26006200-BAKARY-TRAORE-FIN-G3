@@ -1,3 +1,4 @@
+
 # 26006200-BAKARY-TRAORE-FIN-G3
 
 # Projet F16 – Loi d'Okun
@@ -6,19 +7,29 @@
 
 Ce projet étudie la relation entre la croissance économique et la variation du taux de chômage aux États-Unis, dans le cadre de la loi d'Okun.
 
+La loi d'Okun décrit une relation généralement négative entre la croissance de la production économique et l'évolution du chômage.
+
 ## 2. Problématique
 
-Dans quelle mesure la croissance économique suffit-elle à réduire durablement le chômage aux États-Unis ?
+**Dans quelle mesure la croissance économique suffit-elle à réduire durablement le chômage aux États-Unis ?**
 
 ## 3. Objectif
 
-Analyser la relation entre la croissance trimestrielle du PIB réel et la variation du taux de chômage américain à l'aide d'une régression linéaire simple.
+L'objectif principal est d'analyser la relation entre la croissance trimestrielle du PIB réel et la variation du taux de chômage américain à l'aide d'une régression linéaire simple.
 
-L'étude examine également les performances prédictives du modèle, la significativité statistique et la stabilité du coefficient dans le temps.
+L'étude vise également à :
+
+- Évaluer les performances prédictives du modèle.
+- Comparer le modèle à une référence naïve.
+- Examiner la significativité statistique du coefficient estimé.
+- Étudier la stabilité de la relation au cours du temps.
+- Identifier les limites du modèle.
 
 ## 4. Sources et description des données
 
-Les données proviennent de la base FRED (Federal Reserve Economic Data).
+Les données économiques proviennent de la base **FRED (Federal Reserve Economic Data)**, publiée par la Federal Reserve Bank of St. Louis.
+
+### Sources des données
 
 - **PIB réel américain (GDPC1) :** https://fred.stlouisfed.org/series/GDPC1
 - **Taux de chômage américain (UNRATE) :** https://fred.stlouisfed.org/series/UNRATE
@@ -27,37 +38,61 @@ Les données proviennent de la base FRED (Federal Reserve Economic Data).
 
 **Période étudiée :** 1990Q2 à 2026Q3.
 
-Le taux de chômage mensuel est transformé en moyenne trimestrielle afin de l'aligner avec la fréquence du PIB réel.
+Le PIB réel est disponible à une fréquence trimestrielle, tandis que le taux de chômage est mensuel. Les observations mensuelles du chômage sont donc transformées en moyennes trimestrielles afin d'harmoniser les fréquences.
 
-Le jeu de données final comporte 144 observations et 5 variables, sans valeurs manquantes ni doublons.
+Le jeu de données final comporte **144 observations et 5 variables**, sans valeurs manquantes ni doublons.
 
-### Variables principales
+### Variables utilisées
 
 | Variable | Description | Rôle |
 |---|---|---|
 | GDP_Growth | Croissance trimestrielle non annualisée du PIB réel (%) | Explicative (X) |
 | Delta_UNRATE | Variation trimestrielle du taux de chômage (points de pourcentage) | Cible (Y) |
-| PIB_reel | Niveau du PIB réel | Variable de calcul |
-| taux_chomage | Taux de chômage trimestriel moyen | Variable de calcul |
+| PIB_reel | Niveau du PIB réel américain | Variable de calcul |
+| taux_chomage | Taux de chômage trimestriel moyen (%) | Variable de calcul |
+| trimestre | Identifiant de la période trimestrielle | Variable temporelle |
+
+### Formules de calcul
+
+La croissance trimestrielle non annualisée du PIB réel est calculée comme suit :
+
+\[
+GDP\_Growth_t =
+\left(\frac{PIB_t}{PIB_{t-1}}-1\right)\times100
+\]
+
+La variation trimestrielle du taux de chômage est calculée par différence entre deux trimestres successifs :
+
+\[
+Delta\_UNRATE_t = U_t-U_{t-1}
+\]
 
 ## 5. Méthodologie
 
-L'étude repose sur une régression linéaire simple avec un seul prédicteur : la croissance trimestrielle du PIB réel.
+L'étude repose sur un algorithme de **régression linéaire simple**, utilisant un seul prédicteur : la croissance trimestrielle du PIB réel.
 
-Le protocole comprend :
+Le protocole expérimental comprend les étapes suivantes :
 
-- La préparation et l'exploration des données.
-- La construction d'un Pipeline de régression linéaire.
-- Une séparation chronologique entre entraînement (80 %) et test (20 %).
-- Une validation chronologique en cinq plis avec TimeSeriesSplit et GridSearchCV.
-- Une comparaison avec une référence naïve fondée sur la moyenne historique.
-- Une courbe d'apprentissage et des exemples de prédictions.
-- Une analyse statistique avec erreurs-types robustes HAC.
-- Un test de Breusch-Godfrey et une analyse de stabilité du coefficient.
+- Préparation, nettoyage et exploration des données.
+- Construction d'un Pipeline de régression linéaire avec scikit-learn.
+- Séparation chronologique des données : 80 % pour l'entraînement et 20 % pour le test.
+- Validation chronologique en cinq plis avec TimeSeriesSplit.
+- Recherche du meilleur paramétrage avec GridSearchCV.
+- Construction d'une référence naïve fondée sur la moyenne historique calculée sur les données d'entraînement.
+- Calcul des métriques de performance : MAE, MSE et R².
+- Construction et interprétation de la courbe d'apprentissage.
+- Présentation d'exemples de prédictions sur les données de test.
+- Analyse de l'inférence statistique avec erreurs-types robustes HAC.
+- Test de Breusch-Godfrey pour examiner l'autocorrélation des résidus.
+- Analyse de la stabilité du coefficient sur deux sous-périodes.
+
+La séparation chronologique permet de respecter l'ordre temporel des observations et d'éviter l'utilisation d'informations futures pour entraîner le modèle.
 
 ## 6. Environnement de travail
 
-Le projet utilise Python et les bibliothèques suivantes :
+Le projet a été réalisé avec Python dans Google Colab.
+
+Les principales bibliothèques utilisées sont :
 
 | Bibliothèque | Version |
 |---|---|
@@ -68,9 +103,11 @@ Le projet utilise Python et les bibliothèques suivantes :
 | Scikit-learn | 1.6.1 |
 | Statsmodels | 0.15.0 |
 
-Les dépendances sont disponibles dans le fichier `requirements.txt`.
+Les dépendances nécessaires à la reproduction du projet sont répertoriées dans le fichier `requirements.txt`.
 
-## 7. Structure du dépôt
+## 7. Structure du dépôt GitHub
+
+Le dépôt est organisé de la manière suivante :
 
 ```text
 26006200-BAKARY-TRAORE-FIN-G3/
@@ -82,7 +119,11 @@ Les dépendances sont disponibles dans le fichier `requirements.txt`.
 │
 ├── data/
 │   ├── raw/
+│   │   ├── PIB REEL USA trimestriel.csv
+│   │   └── TAUX DE CHOMAGE DE USA mensuel.csv
+│   │
 │   └── processed/
+│       └── donnees_finales_F16.csv
 │
 ├── docs/
 │   ├── CC- Partie B- ML_finance-S7.md
@@ -93,15 +134,43 @@ Les dépendances sont disponibles dans le fichier `requirements.txt`.
 │   └── F16_Loi_Okun_USA.ipynb
 │
 ├── figures/
+│   ├── 01_evolution_croissance_PIB.png
+│   ├── 02_evolution_taux_chomage.png
+│   └── 03_relation_croissance_chomage.png
+│
 ├── rapport/
+│
 └── presentation/
 ```
 
+### Description des dossiers
+
+- `data/raw/` : données économiques brutes téléchargées depuis FRED.
+- `data/processed/` : jeu de données final préparé pour la modélisation.
+- `docs/` : consignes officielles, fiche du sujet et références bibliographiques.
+- `notebooks/` : notebook principal contenant les traitements, les analyses et la modélisation.
+- `figures/` : graphiques issus de l'exploration et de l'analyse des données.
+- `rapport/` : documents du rapport final.
+- `presentation/` : supports de présentation du projet.
+
 ## 8. Principaux résultats et limites
 
-Le modèle optimisé retient une régression linéaire sans constante, avec un coefficient estimé de -0,1388.
+### Résultats du modèle optimisé
 
-Sur les 29 observations de test, les performances obtenues sont :
+La recherche par validation chronologique a retenu une régression linéaire sans constante (`fit_intercept=False`).
+
+Le coefficient estimé de la croissance du PIB réel est de **-0,1388**.
+
+L'équation du modèle retenu est :
+
+\[
+\widehat{Delta\_UNRATE}
+= -0,1388 \times GDP\_Growth
+\]
+
+Le modèle a été évalué sur 29 observations de test, après un entraînement sur 115 observations.
+
+### Comparaison avec la référence naïve
 
 | Indicateur | Régression optimisée | Référence naïve |
 |---|---:|---:|
@@ -109,31 +178,91 @@ Sur les 29 observations de test, les performances obtenues sont :
 | MSE | 2,7676 | 3,7297 |
 | R² | 0,2579 | -0,0001 |
 
-La validation chronologique donne une MAE moyenne de 0,1703 et un écart-type de 0,0710.
+La régression optimisée obtient de meilleures performances que la référence naïve sur les trois indicateurs.
 
-L'analyse statistique avec erreurs-types HAC confirme la significativité du coefficient (p < 0,001). Toutefois, le test de Breusch-Godfrey révèle une autocorrélation des résidus.
+Le coefficient de détermination R² de 0,2579 indique que le modèle explique environ 25,79 % de la variance de la variable cible sur l'échantillon de test.
 
-L'analyse de stabilité montre également que l'intensité de la relation varie selon les sous-périodes étudiées.
+### Validation chronologique
 
-Ces résultats confirment une relation négative entre croissance économique et variation du chômage, tout en montrant que la croissance seule ne suffit pas à expliquer toutes les fluctuations du marché du travail.
+La validation chronologique en cinq plis a donné les résultats suivants pour le meilleur paramétrage :
+
+- MAE moyenne de validation : **0,1703**.
+- Écart-type de la MAE : **0,0710**.
+- Meilleur paramétrage : régression sans constante.
+
+### Analyse statistique et stabilité
+
+L'analyse avec erreurs-types robustes HAC confirme la significativité statistique du coefficient estimé (p < 0,001).
+
+Le test de Breusch-Godfrey révèle une autocorrélation des résidus. Cette dépendance temporelle constitue une limite du modèle. Les erreurs-types robustes HAC permettent de tenir compte de cette caractéristique dans l'inférence statistique.
+
+L'analyse de stabilité sur deux sous-périodes donne les coefficients suivants :
+
+| Sous-période | Coefficient |
+|---|---:|
+| 1990Q2 à 2004Q2 | -0,0718 |
+| 2004Q3 à 2018Q4 | -0,2380 |
+
+L'écart absolu entre les deux coefficients est de 0,1662. La relation reste négative, mais son intensité évolue au cours du temps.
+
+### Conclusion et limites
+
+Les résultats mettent en évidence une relation négative entre la croissance économique et la variation du chômage aux États-Unis, conformément au principe général de la loi d'Okun.
+
+Cependant, la croissance économique ne suffit pas, à elle seule, à expliquer toutes les fluctuations du chômage.
+
+Les principales limites de l'étude sont :
+
+- L'utilisation d'un seul prédicteur économique.
+- L'autocorrélation des résidus.
+- La stabilité imparfaite du coefficient entre les sous-périodes.
+- Les fluctuations exceptionnelles, notamment pendant la crise sanitaire de 2020, qui compliquent les prédictions.
 
 ## 9. Reproduction des résultats
 
-Pour reproduire l'étude :
+Pour reproduire cette étude, suivre les étapes suivantes :
 
-1. Télécharger ou cloner le dépôt GitHub.
-2. Installer les dépendances avec la commande :
+### 1. Récupérer le dépôt
+
+Télécharger ou cloner le dépôt GitHub :
+
+```bash
+git clone https://github.com/bakary289/26006200-BAKARY-TRAORE-FIN-G3.git
+```
+
+### 2. Installer les dépendances
+
+Se placer à la racine du dépôt et exécuter :
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Ouvrir le notebook `F16_Loi_Okun_USA.ipynb` dans Google Colab ou Jupyter.
-4. Vérifier la disponibilité des fichiers de données dans les dossiers correspondants.
-5. Exécuter les cellules dans l'ordre, de la préparation des données jusqu'à l'évaluation du modèle.
+### 3. Ouvrir le notebook
+
+Ouvrir le fichier :
+
+`notebooks/F16_Loi_Okun_USA.ipynb`
+
+Le notebook peut être exécuté dans Google Colab ou dans un environnement Jupyter.
+
+### 4. Vérifier les données
+
+Vérifier la présence des fichiers CSV bruts dans `data/raw/` et du jeu de données préparé dans `data/processed/`.
+
+S'assurer que le répertoire de travail permet d'accéder à ces fichiers avec les chemins utilisés dans le notebook.
+
+### 5. Exécuter l'analyse
+
+Exécuter les cellules du notebook dans l'ordre chronologique, depuis l'importation des données jusqu'à l'évaluation et à l'interprétation du modèle.
+
+Les tableaux, métriques et graphiques permettent de retrouver les principaux résultats présentés dans ce projet.
 
 ## Dépôt GitHub
 
+Le code source, les données, le notebook et les documents du projet sont disponibles à l'adresse suivante :
+
 https://github.com/bakary289/26006200-BAKARY-TRAORE-FIN-G3
+```
 
 
